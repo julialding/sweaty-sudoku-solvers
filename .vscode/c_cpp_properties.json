@@ -23,6 +23,14 @@
             ],
             "defines": [],
             "macFrameworkPath": []
+        },
+        {
+            "name": "cpp",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": []
         }
     ],
     "version": 4
