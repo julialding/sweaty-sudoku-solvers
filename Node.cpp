@@ -7,25 +7,13 @@ class Node {
         int id;
         int data;
     
-    Node (index, data) {
+    Node (int index, int data) {
         id = index;
         data = data;
     }
 
-    // include weight arg for sudoku implementation
-    void addNeighbor(this, neighbor, weight = 0) {
-        // if the neighbor's id is not already in connectedTo
-        if (neighbor.id) {
-            this.connectedTo[neighbor.id] = weight;
-        }
-    }
-
-    void setData (data) {
+    void setData (int data) {
         data = data;
-    }
-
-    <list> getConnections(int e) {
-        return connectedTo[e]; // return the indices
     }
 
     int getID() {
@@ -35,6 +23,4 @@ class Node {
     int getData() {
         return data;
     }
-
-    // int getWeight
-}
+};
