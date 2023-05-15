@@ -37,21 +37,6 @@ class Graph {
                    if (!contains(i-1,j)&& i!=j) { addEdge(i-1,j); }
                 }
             }
-          /* list<int> mylist = {};
-          for (int n : adj[i-1]){
-            for (int x : adj[i-1]){
-              if (x==n){
-                adj[i-1].remove(x);
-                mylist.push_back(x);
-                break;
-              }
-            }
-          }
-          for(int n: mylist){
-            adj[i-1].push_back(n);
-          }
-          adj[i-1].sort(); */
-          
         }
         
     }
