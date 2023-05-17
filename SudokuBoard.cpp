@@ -37,8 +37,11 @@ using namespace std;
        for (int j=0; j<9; j++) {
           if (sb[i][j]!=0) {
             color[count] = sb[i][j];
-            givenIDs[givenIndex] = count;
+            givenIDs[count] = count;
             givenIndex++;
+          }
+          else {
+            givenIDs[count] = -1;
           }
          count++;
        }
@@ -55,30 +58,24 @@ using namespace std;
   }
 
   bool isSafeToColor(int v, int c){
-    bool inGiven = false;
-    for (int i = 0; i<81;i++){
-      if (v == givenIDs[i]){inGiven = true;}
-    }
-    if (inGiven && color[v] == c){return true;}
-    else if(inGiven){return false;}
-
+    bool inGiven = (givenIDs[v] != -1);
+    if (inGiven){ return false;}
     for (int i = 0;i<81;i++){
-      if (color[i]==c && isNeighbor(v,i)){return false;}
+      if (color[i]==c && isNeighbor(v,i+1)){return false;}
     }
-    return false;
+    return true;
   }
 
   bool graphColorUtility(int v) {
     if (v >= 82){
       return true;
     }
-    bool inGiven = false;
-    for (int i = 0;i<81;i++){
-      if (v==givenIDs[i]){inGiven = true;}
-    }
-    for (int c = 1; c<= 10;c++){
-      if (isSafeToColor(v,c)==true){
+    bool inGiven = (givenIDs[v]!= -1);
+    for (int c = 1; c<= 9;c++){
+      if (isSafeToColor(v,c)){
         color[v] = c;
+        givenIDs[v] = v;
+        sb[v/9][v%9] = color[v];
         if (graphColorUtility(v+1)){return true;}
       }
       if (!inGiven){
@@ -90,13 +87,10 @@ using namespace std;
 
   bool solveGraphColoring() {
     initializeGraphColoring();
-    if (graphColorUtility(1) == false) {
-      return false;
-    }
     int count = 0;
     for (int i=0; i<9; i++){
       for (int k=0; k<9; k++){
-        sb[i][k] = color[count];
+        graphColorUtility(count);
         count++;
       }
     }
